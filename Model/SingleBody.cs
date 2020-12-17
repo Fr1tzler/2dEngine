@@ -39,7 +39,7 @@ namespace tempProject.Model
                 .Select(elem => elem.Y);
             var from = new Vector2f(pointsX.Min(), pointsY.Min());
             var to = new Vector2f(pointsX.Max(), pointsY.Max());
-            BoundingBox = new Tuple<Vector2f, Vector2f>(from, to);
+            BoundingBox = new Tuple<Vector2f, Vector2f>(from + Position, to + Position);
         }
         
         public void Update(float deltaTime)
@@ -51,11 +51,12 @@ namespace tempProject.Model
             UpdateBoundingBox();
         }
         
-        public SingleBody(List<Vector2f> geometry, Vector2f position, Vector2f velocity, Vector2f acceleration)
+        public SingleBody(List<Vector2f> geometry, Vector2f position, Vector2f velocity, Vector2f acceleration, float rotation)
         {
             Geometry = geometry;
             Position = position;
             Velocity = velocity;
+            RotationVelocity = rotation;
             Acceleration = acceleration;
             MassCenter = new Vector2f(0, 0);
             foreach (var vector2F in Geometry)

@@ -13,17 +13,38 @@ namespace tempProject.Model
             Bodies = new List<SingleBody>();
             var geo = new List<Vector2f>();
             geo.Add(new Vector2f(0, 0));
-            geo.Add(new Vector2f(20, 20));
-            geo.Add(new Vector2f(0, 20));
-            Bodies.Add(new SingleBody(geo, new Vector2f(0, 0), new Vector2f(0.05f, 0.05f), new Vector2f(0.05f, 0.05f)));
-            Bodies.Add(new SingleBody(geo, new Vector2f(0, 100), new Vector2f(0.05f, 0f), new Vector2f(0.05f, 0f)));
+            geo.Add(new Vector2f(20, 40));
+            geo.Add(new Vector2f(0, 40));
+            Bodies.Add(new SingleBody(geo, new Vector2f(0, 20), new Vector2f(0.05f, 0.05f), new Vector2f(0.001f, 0.001f), 0.4f));
+            Bodies.Add(new SingleBody(geo, new Vector2f(0, 120), new Vector2f(0.05f, 0f), new Vector2f(0.001f, 0f), 0.1f));
             geo = new List<Vector2f>();
             geo.Add(new Vector2f(0, 0));
             geo.Add(new Vector2f(0, 5));
             geo.Add(new Vector2f(800, 5));
             geo.Add(new Vector2f(800, 0));
-            Bodies.Add(new SingleBody(geo, new Vector2f(0, 0), new Vector2f(0f, 0f), new Vector2f(0f, 0f)));
-
+            Bodies.Add(new SingleBody(geo, new Vector2f(0, 0), new Vector2f(0f, 0f), new Vector2f(0f, 0f), 0f));
+            geo = new List<Vector2f>();
+            geo.Add(new Vector2f(0, 0));
+            geo.Add(new Vector2f(5, 0));
+            geo.Add(new Vector2f(5, 600));
+            geo.Add(new Vector2f(0, 600));
+            Bodies.Add(new SingleBody(geo, new Vector2f(0, 0), new Vector2f(0f, 0f), new Vector2f(0f, 0f), 0f));
+            geo = new List<Vector2f>();
+            geo.Add(new Vector2f(0, 0));
+            geo.Add(new Vector2f(0, 5));
+            geo.Add(new Vector2f(800, 5));
+            geo.Add(new Vector2f(800, 0));
+            Bodies.Add(new SingleBody(geo, new Vector2f(0, 595), new Vector2f(0f, 0f), new Vector2f(0f, 0f), 0f));
+            geo = new List<Vector2f>();
+            geo.Add(new Vector2f(0, 0));
+            geo.Add(new Vector2f(5, 0));
+            geo.Add(new Vector2f(5, 600));
+            geo.Add(new Vector2f(0, 600));
+            Bodies.Add(new SingleBody(geo, new Vector2f(795, 0), new Vector2f(0f, 0f), new Vector2f(0f, 0f), 0f));
+            foreach (var body in Bodies)
+            {
+                Console.WriteLine(body.BoundingBox);
+            }            
         }
 
         public void Update(float dt)
@@ -39,6 +60,7 @@ namespace tempProject.Model
                 {
                     if (Bodies[bodyId].CollidedWith(Bodies[bodyId2]))
                     {
+                        //Console.WriteLine("FUCK!");
                         Bodies[bodyId].Acceleration *= -1f;
                         Bodies[bodyId].Velocity *= -1f;
                         Bodies[bodyId2].Acceleration *= -1f;

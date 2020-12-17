@@ -5,9 +5,12 @@ namespace tempProject.Model
 {
     public static class MathModule
     {
-        public static Vector2f RotatedBy(this Vector2f vector2, double radians)
+        public static Vector2f RotatedBy(this Vector2f vector, double degrees)
         {
-            return vector2;
+            var radians = degrees * Math.PI / 180;
+            var x = vector.X * Math.Cos(radians) - vector.Y * Math.Sin(radians);
+            var y = vector.X * Math.Sin(radians) + vector.Y * Math.Cos(radians);
+            return new Vector2f((float)x, (float)y);
         }
 
         public static bool BoxIntersected(Tuple<Vector2f, Vector2f> firstBox, Tuple<Vector2f, Vector2f> secondBox)
